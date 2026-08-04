@@ -19,11 +19,11 @@ export function BrandStoryPopup() {
         <div className="sticky top-0 w-full bg-[#050002]/80 backdrop-blur-xl z-10 border-b border-white/10 flex justify-between items-center p-6 md:px-12">
           <h2 className="font-serif text-2xl md:text-3xl">The Story</h2>
           <button 
-            onClick={closePopup}
-            className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors"
-          >
-            <X size={24} />
-          </button>
+          onClick={closePopup}
+          className="fixed top-6 right-6 md:top-8 md:right-8 z-[60] p-3 bg-primary text-white rounded-full hover:bg-primary/80 shadow-2xl transition-all"
+        >
+          <X size={28} strokeWidth={2.5} />
+        </button>
         </div>
 
         <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">

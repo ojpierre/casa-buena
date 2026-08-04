@@ -29,7 +29,7 @@ export function AgeGate() {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.6 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xl"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-[#0A0004]"
         >
           <div className="text-center p-8 max-w-md w-full">
             {/* Text Logo */}

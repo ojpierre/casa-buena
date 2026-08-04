@@ -1,13 +1,14 @@
 import { PopupProvider } from '@/context/PopupContext';
 
 import { AgeGate } from '@/components/AgeGate';
+import { Header } from '@/components/Header';
 import { Marquee } from '@/components/Marquee';
 import { Hero } from '@/sections/Hero';
+import { VibeSection } from '@/sections/VibeSection';
 import { ProductTeaser } from '@/sections/ProductTeaser';
 import { Education } from '@/sections/Education';
 import { LifestyleSection } from '@/sections/LifestyleSection';
 import { StoryStrip } from '@/sections/StoryStrip';
-import { VibeSection } from '@/sections/VibeSection';
 import { FindIt } from '@/sections/FindIt';
 import { Footer } from '@/sections/Footer';
 
@@ -20,14 +21,15 @@ function MainApp() {
   return (
     <div className="w-full bg-black min-h-screen text-white relative">
       <AgeGate />
+      <Header />
       
       <Hero />
       <Marquee />
+      <VibeSection />
       <ProductTeaser />
       <Education />
       <LifestyleSection />
       <StoryStrip />
-      <VibeSection />
       <FindIt />
       <Footer />
 

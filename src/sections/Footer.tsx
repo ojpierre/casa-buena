@@ -31,7 +31,7 @@ export function Footer() {
         <a href="#" className="text-white hover:text-primary transition-colors"><Twitter size={24} /></a>
       </div>
 
-      <p className="font-sans font-bold text-white text-base tracking-wider mb-12">#SWITCHUPYOURVIBE</p>
+      <p className="font-sans font-bold text-white text-base tracking-wider mb-12">#CASABUENACASAVIBES</p>
 
       <div className="w-full max-w-4xl h-[1px] bg-white/20 mb-8" />
 

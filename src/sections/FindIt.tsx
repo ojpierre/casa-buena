@@ -1,99 +1,102 @@
+import 'leaflet/dist/leaflet.css';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, MapPin } from 'lucide-react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
+
+// Create a custom pulsing red dot icon using Leaflet's divIcon
+const createCustomIcon = () => {
+  return L.divIcon({
+    className: 'custom-leaflet-icon',
+    html: `
+      <div class="relative flex h-6 w-6 items-center justify-center -ml-3 -mt-3">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+      </div>
+    `,
+    iconSize: [24, 24],
+    iconAnchor: [12, 12],
+    popupAnchor: [0, -12],
+  });
+};
+
+const customIcon = createCustomIcon();
 
 export function FindIt() {
-  const [activeCity, setActiveCity] = useState<string | null>(null);
+  const [activeLocation, setActiveLocation] = useState<string | null>(null);
 
-  const cities = [
-    { id: 'nairobi', name: 'Nairobi', top: '55%', left: '48%', descOn: 'Rooftop bars, premium clubs, selected restaurants.', descOff: 'Naivas, Carrefour, Quickmart, local liquor stores.' },
-    { id: 'mombasa', name: 'Mombasa', top: '75%', left: '65%', descOn: 'Beachfront lounges, Old Town bars.', descOff: 'Major supermarkets, Diani liquor stores.' },
-    { id: 'nakuru', name: 'Nakuru', top: '48%', left: '40%', descOn: 'CBD lounges, resort bars.', descOff: 'Naivas, local distributors.' },
-    { id: 'eldoret', name: 'Eldoret', top: '42%', left: '32%', descOn: 'Premium clubs, sports bars.', descOff: 'Major supermarkets.' },
-    { id: 'kisumu', name: 'Kisumu', top: '50%', left: '20%', descOn: 'Lakefront lounges, CBD bars.', descOff: 'Naivas, United Mall stores.' },
+  // Westlands, Nairobi locations
+  const locations = [
+    { id: 'westgate', name: 'Westgate Mall', lat: -1.2580, lng: 36.8030, desc: 'Premium Liquor Store & Supermarket' },
+    { id: 'sarit', name: 'Sarit Centre', lat: -1.2610, lng: 36.8010, desc: 'Carrefour & Specialized Wine Shops' },
+    { id: 'alchemist', name: 'The Alchemist', lat: -1.2630, lng: 36.8050, desc: 'Bars & Nightlife' },
+    { id: 'sankara', name: 'Sankara Nairobi', lat: -1.2640, lng: 36.8020, desc: 'Rooftop Lounge & Restaurant' },
+    { id: 'js', name: "J's Fresh Bar & Kitchen", lat: -1.2680, lng: 36.8060, desc: 'Restaurant & Bar' },
   ];
 
+  // Center on Westlands
+  const mapCenter: [number, number] = [-1.2635, 36.8035];
+
   return (
-    <section id="find-it" className="w-full bg-white py-24 md:py-32 px-6">
-      <div className="container mx-auto max-w-5xl">
+    <section id="find-it" className="w-full bg-[#0A0004] py-24 md:py-32 px-6 border-t border-white/10">
+      <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-16">
-          <h2 className="font-serif text-5xl md:text-6xl text-[#2A1810] mb-4">Find your nearest Casa Buena.</h2>
-          <p className="font-sans text-[#2A1810]/60 text-lg">Available across Kenya — in bottle and carton — wherever good moments happen.</p>
+          <h2 className="font-serif text-5xl md:text-6xl text-white mb-4">Find your nearest Casa Buena.</h2>
+          <p className="font-sans text-white/60 text-lg">Available across Kenya — in bottle and carton — wherever good moments happen.</p>
         </div>
 
-        <div className="relative w-full max-w-2xl mx-auto aspect-square md:aspect-[4/3] bg-[#F5EDE0] rounded-2xl p-8 mb-16 shadow-inner">
-          {/* Kenya Map SVG Outline */}
-          <div className="absolute inset-0 p-8 flex items-center justify-center opacity-30">
-            <svg viewBox="0 0 100 100" className="w-full h-full" fill="none" stroke="#2A1810" strokeWidth="0.5">
-              <path d="M40 10 L60 15 L70 30 L80 40 L90 60 L80 80 L70 90 L50 85 L30 90 L20 70 L10 50 L15 30 Z" />
-            </svg>
-          </div>
-
-          {/* Dots */}
-          {cities.map((city, i) => (
-            <div 
-              key={city.id} 
-              className="absolute" 
-              style={{ top: city.top, left: city.left }}
-            >
-              <motion.button
-                className="w-4 h-4 bg-primary rounded-full relative z-10"
-                animate={{ scale: [1, 1.4, 1] }}
-                transition={{ duration: 2, repeat: Infinity, delay: i * 0.4 }}
-                onClick={() => setActiveCity(city.id)}
-              />
-              <span className="absolute top-6 left-1/2 -translate-x-1/2 font-sans text-xs font-bold text-[#2A1810] tracking-widest">{city.name}</span>
-            </div>
-          ))}
-
-          {/* Tooltip */}
-          <AnimatePresence>
-            {activeCity && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white shadow-2xl rounded-xl p-6 w-64 z-20"
+        {/* Map Container */}
+        <div className="relative w-full mx-auto h-[500px] md:h-[600px] rounded-2xl overflow-hidden shadow-2xl shadow-primary/10 border border-white/10 mb-16 z-0">
+          <MapContainer 
+            center={mapCenter} 
+            zoom={15} 
+            scrollWheelZoom={false}
+            className="h-full w-full bg-[#0A0004]"
+          >
+            {/* CartoDB Dark Matter tiles for a premium aesthetic */}
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+              url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+            />
+            
+            {locations.map((loc) => (
+              <Marker 
+                key={loc.id} 
+                position={[loc.lat, loc.lng]} 
+                icon={customIcon}
+                eventHandlers={{
+                  click: () => setActiveLocation(loc.id),
+                }}
               >
-                <button 
-                  onClick={() => setActiveCity(null)}
-                  className="absolute top-4 right-4 text-gray-400 hover:text-black"
-                >
-                  <X size={16} />
-                </button>
-                <h4 className="font-serif text-2xl text-primary mb-4">
-                  {cities.find(c => c.id === activeCity)?.name}
-                </h4>
-                <div className="mb-4">
-                  <span className="font-sans font-bold text-[10px] text-gray-400 uppercase tracking-widest block mb-1">On Premise</span>
-                  <p className="font-sans text-sm text-[#2A1810]">
-                    {cities.find(c => c.id === activeCity)?.descOn}
-                  </p>
-                </div>
-                <div>
-                  <span className="font-sans font-bold text-[10px] text-gray-400 uppercase tracking-widest block mb-1">Off Premise</span>
-                  <p className="font-sans text-sm text-[#2A1810]">
-                    {cities.find(c => c.id === activeCity)?.descOff}
-                  </p>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                <Popup className="casa-popup">
+                  <div className="font-sans p-1">
+                    <h4 className="font-serif text-xl text-primary mb-1">{loc.name}</h4>
+                    <p className="text-sm text-gray-600 mb-2">{loc.desc}</p>
+                    <span className="text-[10px] uppercase tracking-widest text-gray-400 font-bold">Westlands, Nairobi</span>
+                  </div>
+                </Popup>
+              </Marker>
+            ))}
+          </MapContainer>
+          
+          {/* Overlay gradient to blend map edges into the dark background */}
+          <div className="absolute inset-0 pointer-events-none rounded-2xl ring-1 ring-inset ring-white/10 shadow-[inset_0_0_40px_rgba(10,0,4,1)] z-10" />
         </div>
 
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white p-8 rounded-xl shadow-md border-t-4 border-t-primary hover:shadow-lg transition-shadow">
-            <h3 className="font-serif text-2xl text-[#2A1810] mb-3">Bars & Clubs</h3>
-            <p className="font-sans text-[#2A1810]/70 text-sm">Ask for Casa Buena at your favourite spot. The new bottle looks just as good on a table as it does in a glass.</p>
+          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-xl border border-white/10 border-b-4 border-b-primary hover:bg-white/10 transition-colors">
+            <h3 className="font-serif text-2xl text-white mb-3">Bars & Clubs</h3>
+            <p className="font-sans text-white/70 text-sm">Ask for Casa Buena at your favourite spot. The new bottle looks just as good on a table as it does in a glass.</p>
           </div>
-          <div className="bg-white p-8 rounded-xl shadow-md border-t-4 border-t-primary hover:shadow-lg transition-shadow">
-            <h3 className="font-serif text-2xl text-[#2A1810] mb-3">Supermarkets & Liquor Stores</h3>
-            <p className="font-sans text-[#2A1810]/70 text-sm">Pick up the bottle or the carton on the way. Available at Naivas, Carrefour, Quickmart, and local liquor stores across Kenya.</p>
+          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-xl border border-white/10 border-b-4 border-b-primary hover:bg-white/10 transition-colors">
+            <h3 className="font-serif text-2xl text-white mb-3">Supermarkets</h3>
+            <p className="font-sans text-white/70 text-sm">Pick up the bottle or the carton on the way. Available at Naivas, Carrefour, Quickmart, and local liquor stores.</p>
           </div>
-          <div className="bg-white p-8 rounded-xl shadow-md border-t-4 border-t-primary hover:shadow-lg transition-shadow">
-            <h3 className="font-serif text-2xl text-[#2A1810] mb-3">Online Delivery</h3>
-            <p className="font-sans text-[#2A1810]/70 text-sm">Some vendors deliver. Some don't. Either way, you won't have to look far. Casa Buena is everywhere the good moments are.</p>
+          <div className="bg-white/5 backdrop-blur-sm p-8 rounded-xl border border-white/10 border-b-4 border-b-primary hover:bg-white/10 transition-colors">
+            <h3 className="font-serif text-2xl text-white mb-3">Online Delivery</h3>
+            <p className="font-sans text-white/70 text-sm">Some vendors deliver. Some don't. Either way, you won't have to look far. Casa Buena is everywhere the good moments are.</p>
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@ export function Education() {
 
         <div className="flex flex-col md:flex-row gap-6 md:gap-8 mb-16 overflow-x-auto pb-8 md:pb-0 snap-x no-scrollbar">
           {/* Card 1 */}
-          <div className="min-w-[85vw] md:min-w-0 md:flex-1 bg-white rounded-xl shadow-lg p-8 md:p-10 border-t-4 border-t-primary snap-center flex-shrink-0">
+          <div className="min-w-[85vw] md:min-w-0 md:flex-1 bg-white rounded-xl shadow-lg p-8 md:p-10 border-b-4 border-b-primary snap-center flex-shrink-0">
             <h4 className="font-sans font-bold text-xs tracking-widest text-primary uppercase mb-4">Where it comes from</h4>
             <p className="font-sans text-[#2A1810]/80 leading-relaxed">
               Sangria is a centuries-old Spanish tradition — real wine blended with fruit notes until it becomes something the whole table loves. Casa Buena Red starts with young Grenache from Cariñena, one of Spain's oldest wine regions. Our White uses Macabeo, a classic grape with natural citrus and floral character.
@@ -21,7 +21,7 @@ export function Education() {
           </div>
 
           {/* Card 2 */}
-          <div className="min-w-[85vw] md:min-w-0 md:flex-1 bg-white rounded-xl shadow-lg p-8 md:p-10 border-t-4 border-t-primary snap-center flex-shrink-0">
+          <div className="min-w-[85vw] md:min-w-0 md:flex-1 bg-white rounded-xl shadow-lg p-8 md:p-10 border-b-4 border-b-primary snap-center flex-shrink-0">
             <h4 className="font-sans font-bold text-xs tracking-widest text-primary uppercase mb-4">What it tastes like</h4>
             <p className="font-sans text-[#2A1810]/80 leading-relaxed">
               Fresh Mediterranean orange. Red berries. A whisper of tropical fruit. Sweet but never heavy, with no aftertaste that overstays its welcome. Whether you're pouring from the new bottle or the classic carton — it's the same refreshing blend that respects your evening.
@@ -29,7 +29,7 @@ export function Education() {
           </div>
 
           {/* Card 3 */}
-          <div className="min-w-[85vw] md:min-w-0 md:flex-1 bg-white rounded-xl shadow-lg p-8 md:p-10 border-t-4 border-t-primary snap-center flex-shrink-0">
+          <div className="min-w-[85vw] md:min-w-0 md:flex-1 bg-white rounded-xl shadow-lg p-8 md:p-10 border-b-4 border-b-primary snap-center flex-shrink-0">
             <h4 className="font-sans font-bold text-xs tracking-widest text-primary uppercase mb-4">When to drink it</h4>
             <p className="font-sans text-[#2A1810]/80 leading-relaxed">
               Honestly? Whenever the moment feels right. Casa Buena is an everyday drink made to feel special. Chilled is best. With fruits is great. With people you like is perfect. The bottle dresses it up. The carton keeps it casual. You decide.

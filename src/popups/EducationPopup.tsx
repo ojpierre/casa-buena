@@ -19,11 +19,11 @@ export function EducationPopup() {
         <div className="sticky top-0 w-full bg-[#F5EDE0]/90 backdrop-blur-md z-10 border-b border-[#2A1810]/10 flex justify-between items-center p-6">
           <h2 className="font-serif text-3xl text-primary">What Is Sangria?</h2>
           <button 
-            onClick={closePopup}
-            className="p-2 bg-[#2A1810]/5 rounded-full hover:bg-[#2A1810]/10 transition-colors"
-          >
-            <X size={24} />
-          </button>
+          onClick={closePopup}
+          className="fixed top-6 right-6 md:top-8 md:right-8 z-[60] p-3 bg-primary text-white rounded-full hover:bg-primary/80 shadow-2xl transition-all"
+        >
+          <X size={28} strokeWidth={2.5} />
+        </button>
         </div>
 
         <div className="max-w-3xl mx-auto px-6 py-16 space-y-24">

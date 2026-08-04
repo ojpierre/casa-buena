@@ -51,9 +51,9 @@ export function ServePopup() {
       >
         <button 
           onClick={closePopup}
-          className="absolute top-6 right-6 z-50 p-2 bg-black/50 backdrop-blur-md rounded-full hover:bg-black/70 transition-colors"
+          className="fixed top-6 right-6 md:top-8 md:right-8 z-[60] p-3 bg-primary text-white rounded-full hover:bg-primary/80 shadow-2xl transition-all"
         >
-          <X size={24} />
+          <X size={28} strokeWidth={2.5} />
         </button>
 
         {/* Header Image */}

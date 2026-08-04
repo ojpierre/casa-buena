@@ -8,7 +8,7 @@ export function Hero() {
   const opacity = useTransform(scrollY, [0, 100], [1, 0]);
   
   return (
-    <section className="relative w-full h-[100dvh] overflow-hidden flex flex-col items-center justify-center bg-black">
+    <section id="hero" className="relative w-full h-[100dvh] overflow-hidden flex flex-col items-center justify-center bg-black">
       {/* Background Image — Hero Bottle Shot */}
       <div className="absolute inset-0 z-0">
         <img 

@@ -5,7 +5,7 @@ export function ProductTeaser() {
   const { openPopup } = usePopup();
 
   return (
-    <section className="w-full bg-[#0A0004]">
+    <section id="products" className="w-full bg-[#0A0004]">
       {/* Bottle Hero — Primary Product */}
       <div className="relative w-full border-b border-white/10">
         <div 

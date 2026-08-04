@@ -59,7 +59,7 @@ const RESULTS = {
   B: {
     name: "The Everyday Catch Up",
     serve: "Casa Buena White over ice, passion fruit sliced on top, zero fuss. Pour from the carton or the bottle — the vibe is what matters.",
-    tag: "#SwitchUpYourVibe"
+    tag: "#CasaBuenaCasaVibes"
   },
   C: {
     name: "The Purposeful Connection",
@@ -95,11 +95,11 @@ export function VibeSection() {
   const progress = (step / 5) * 100;
 
   return (
-    <section className="w-full bg-[#0A0004] py-24 md:py-32 px-6">
+    <section id="vibes" className="w-full bg-[#0A0004] py-24 md:py-32 px-6">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-12">
           <h2 className="font-serif text-5xl md:text-6xl text-white mb-4">Great vibes only.</h2>
-          <p className="font-sans font-bold text-primary text-xl tracking-wider">#SwitchUpYourVibe</p>
+          <p className="font-sans font-bold text-primary text-xl tracking-wider">#CasaBuenaCasaVibes</p>
         </div>
 
         {/* Quiz */}
@@ -157,7 +157,7 @@ export function VibeSection() {
                   
                   <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                     <a
-                      href={`https://wa.me/?text=I%20got%20${encodeURIComponent(result.name)}!%20Chilling%20with%20Casa%20Buena%20%F0%9F%8D%B7%20%23SwitchUpYourVibe`}
+                      href={`https://wa.me/?text=I%20got%20${encodeURIComponent(result.name)}!%20Chilling%20with%20Casa%20Buena%20%F0%9F%8D%B7%20%23CasaBuenaCasaVibes`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="bg-white text-primary font-bold font-sans py-3 px-6 rounded-full hover:bg-white/90 transition-colors w-full sm:w-auto"
